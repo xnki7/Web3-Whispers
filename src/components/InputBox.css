@@ -1,0 +1,18 @@
+.InputBox .entry{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.InputBox{
+    width: 60rem;
+    border: 2px solid black;
+    margin: auto;
+}
+
+.InputBox button{
+    width: 6rem;
+    margin: auto;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}

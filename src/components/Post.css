@@ -1,0 +1,13 @@
+.Post .entry{
+    display: flex;
+    align-items: center;
+}
+
+.Post{
+    border: 1px solid black;
+    margin-bottom: 0.5rem;
+}
+
+p{
+    margin-left: 1rem;
+}
