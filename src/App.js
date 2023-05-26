@@ -10,7 +10,7 @@ function App() {
   const [provider, setProvider] = useState(null);
   const [account, setAccount] = useState(null);
   const [signer, setSigner] = useState(null);
-  const [isConnected, setIsConnected] = useState(false);
+  // const [isConnected, setIsConnected] = useState(false);
   const [contract, setContract] = useState(null);
 
   const [title, setTitle] = useState(null);
@@ -46,7 +46,7 @@ function App() {
 
         console.log(contract);
         setAccount(address);
-        setIsConnected(true);
+        console.log(account);
         getUploadedPostss();
       } catch (err) {
         console.log(err);
