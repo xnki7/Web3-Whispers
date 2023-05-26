@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./Post.css";
 
-function Post({ content, tags, author, title }) {
+function Post({ contract, content, tags, author, title, id }) {
+  const [likes, setLikes] = useState(null);
+
+  useEffect(() => {
+    getLikes();
+  });
+
+  async function likePost() {
+    const tx = await contract.likePost(id);
+    await tx.wait();
+    // window.location.reload();
+    getLikes();
+  }
+
+  async function getLikes() {
+    const like = await contract.getLikes(id);
+    setLikes(parseInt(like));
+  }
+
   return (
     <div className="Post">
       <div className="entry">
@@ -22,8 +40,15 @@ function Post({ content, tags, author, title }) {
       </div>
       <div className="entry">
         <h5>Likes :</h5>
-        <p></p>
+        <p>{likes}</p>
       </div>
+      <button
+        onClick={() => {
+          likePost();
+        }}
+      >
+        Like
+      </button>
     </div>
   );
 }

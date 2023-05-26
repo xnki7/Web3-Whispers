@@ -17,9 +17,14 @@ function App() {
   const [content, setContent] = useState(null);
   const [tags, setTags] = useState(null);
 
-  const [uploadedPosts, setUploadedPosts] = useState([]);
+  const [uploadedPosts, setUploadedPosts] = useState(null);
+  // const [likes, setLikes] = useState(null);
 
   useEffect(() => {
+    loadBcData();
+  }, []);
+
+  async function loadBcData() {
     const provider = new ethers.providers.Web3Provider(window.ethereum);
     setProvider(provider);
     const signer = provider.getSigner();
@@ -30,7 +35,7 @@ function App() {
       signer
     );
     setContract(contractInstance);
-  }, []);
+  }
 
   async function connectWallet() {
     if (window.ethereum) {
@@ -52,17 +57,13 @@ function App() {
   async function createPost() {
     const tx = await contract.createBlogPost(title, tags, content);
     await tx.wait();
+    getUploadedPostss();
   }
 
   async function getUploadedPostss() {
     const posts = await contract.getUploadedPosts();
-    console.log(posts);
     setUploadedPosts(posts);
   }
-
-  // async function likePost(){
-  //   const tx = await contract.likePost
-  // }
 
   return (
     <div className="App">
@@ -73,16 +74,34 @@ function App() {
         setTags={setTags}
         createPost={createPost}
       />
-      {uploadedPosts.map((post) => {
+      {uploadedPosts ? (
+        uploadedPosts.map((post) => {
+          return (
+            <Post
+              contract={contract}
+              id={post.id}
+              content={post.content}
+              tags={post.tag}
+              author={post.author}
+              title={post.postTitle}
+            />
+          );
+        })
+      ) : (
+        <p>Connect Wallet to see posts.</p>
+      )}
+      {/* {uploadedPosts.map((post) => {
         return (
           <Post
+            contract={contract}
+            id={post.id}
             content={post.content}
             tags={post.tag}
             author={post.author}
             title={post.postTitle}
           />
         );
-      })}
+      })} */}
     </div>
   );
 }
