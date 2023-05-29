@@ -2,10 +2,13 @@
     display: flex;
     align-items: center;
     flex-direction: column;
+    background-color: #FFF5E5;
+    width: 100%;
+    height: 100vh;
 }
 
 .App .contents{
     width: 100%;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
 }
