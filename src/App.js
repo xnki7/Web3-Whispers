@@ -81,7 +81,7 @@ function App() {
       <Navbar connectWallet={connectWallet} />
       <InputBox getUploadedPostss={getUploadedPostss} contract={contract} />
       {uploadedPosts ? (
-        uploadedPosts.reverse.map((post) => {
+        uploadedPosts.slice(0).reverse().map((post) => {
           return (
             <Post
               contract={contract}
