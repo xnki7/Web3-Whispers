@@ -5,7 +5,6 @@ import axios from "axios";
 function InputBox({ contract, getUploadedPostss }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
-  const [uploaded, setUploaded] = useState(false);
 
   const [title, setTitle] = useState(null);
   const [content, setContent] = useState(null);
@@ -13,6 +12,7 @@ function InputBox({ contract, getUploadedPostss }) {
   const [cid, setCid] = useState(null);
 
   async function createPost() {
+    // handleUpload();
     const tx = await contract.createBlogPost(title, tags, content, cid);
     await tx.wait();
     getUploadedPostss();
@@ -24,10 +24,12 @@ function InputBox({ contract, getUploadedPostss }) {
   //   setContent(null);
   //   setTags(null);
   //   setCid(null);
+  //   document.getElementsByClassName("input").value = "";
   // }
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
+    // handleUpload();
   };
 
   const handleUpload = async () => {
@@ -52,7 +54,6 @@ function InputBox({ contract, getUploadedPostss }) {
 
       console.log("IPFS CID:", response.data.IpfsHash);
       setCid(response.data.IpfsHash);
-      setUploaded(true);
     } catch (error) {
       console.error("Error uploading to IPFS:", error);
     } finally {
@@ -66,6 +67,7 @@ function InputBox({ contract, getUploadedPostss }) {
         <h3>Title :</h3>
         <input
           type="text"
+          class="input"
           onChange={(e) => {
             setTitle(e.target.value);
           }}
@@ -75,6 +77,7 @@ function InputBox({ contract, getUploadedPostss }) {
         <h3>Tags :</h3>
         <input
           type="text"
+          class="input"
           onChange={(e) => {
             setTags(e.target.value);
           }}
@@ -88,6 +91,7 @@ function InputBox({ contract, getUploadedPostss }) {
           name=""
           id=""
           cols="30"
+          class="input"
           rows="10"
           onChange={(e) => {
             setContent(e.target.value);
@@ -97,10 +101,7 @@ function InputBox({ contract, getUploadedPostss }) {
       <div>
         <h2>Upload to IPFS via Pinata</h2>
         <input type="file" onChange={handleFileChange} />
-        <button
-          onClick={handleUpload}
-          disabled={!selectedFile || uploading || uploaded}
-        >
+        <button onClick={handleUpload} disabled={!selectedFile || uploading}>
           {uploading ? "Uploading..." : "Upload"}
         </button>
         {uploading && <div>Loading...</div>}

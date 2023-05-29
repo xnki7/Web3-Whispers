@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./components/Navbar.jsx";
 import InputBox from "./components/InputBox";
 import Post from "./components/Post";
+import PostModal from "./components/PostModal";
 import { contractAddress, contractAbi } from "./constant/constant";
 import { ethers } from "ethers";
 
@@ -12,10 +13,16 @@ function App() {
   const [signer, setSigner] = useState(null);
   const [contract, setContract] = useState(null);
   const [uploadedPosts, setUploadedPosts] = useState(null);
+  const [toggle, setToggle] = useState(false);
 
   useEffect(() => {
     loadBcData();
   }, []);
+
+  function togglePop(){
+    // setToggle(true);
+    toggle ? setToggle(false) : setToggle(true)
+  }
 
   const networks = {
     polygon: {
@@ -79,7 +86,8 @@ function App() {
   return (
     <div className="App">
       <Navbar connectWallet={connectWallet} />
-      <InputBox getUploadedPostss={getUploadedPostss} contract={contract} />
+      <button onClick={togglePop}>Create Post</button>
+      {toggle && (<InputBox getUploadedPostss={getUploadedPostss} contract={contract} />)}
       {uploadedPosts ? (
         uploadedPosts.slice(0).reverse().map((post) => {
           return (
