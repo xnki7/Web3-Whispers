@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Post.css";
 
-function Post({ contract, content, tags, author, title, id }) {
+function Post({ contract, content, tags, author, title, id, cid }) {
   const [likes, setLikes] = useState(null);
 
   useEffect(() => {
@@ -22,6 +22,9 @@ function Post({ contract, content, tags, author, title, id }) {
 
   return (
     <div className="Post">
+      <div className="entry">
+        <img src={`https://gateway.ipfs.io/ipfs/${cid}`} alt="" />
+      </div>
       <div className="entry">
         <h4>Title :</h4>
         <h6>{title}</h6>

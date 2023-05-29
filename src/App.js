@@ -10,22 +10,29 @@ function App() {
   const [provider, setProvider] = useState(null);
   const [account, setAccount] = useState(null);
   const [signer, setSigner] = useState(null);
-  // const [isConnected, setIsConnected] = useState(false);
   const [contract, setContract] = useState(null);
-
-  const [title, setTitle] = useState(null);
-  const [content, setContent] = useState(null);
-  const [tags, setTags] = useState(null);
-
   const [uploadedPosts, setUploadedPosts] = useState(null);
-  // const [likes, setLikes] = useState(null);
 
   useEffect(() => {
     loadBcData();
   }, []);
 
+  const networks = {
+    polygon: {
+      chainId: `0x${Number(80001).toString(16)}`,
+      chainName: "Polygon Testnet",
+      nativeCurrency: {
+        name: "MATIC",
+        symbol: "MATIC",
+        decimals: 18,
+      },
+      rpcUrls: ["https://rpc-mumbai.maticvigil.com/"],
+      blockExplorerUrls: ["https://mumbai.polygonscan.com/"],
+    },
+  };
+
   async function loadBcData() {
-    const provider = new ethers.providers.Web3Provider(window.ethereum);
+    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
     setProvider(provider);
     const signer = provider.getSigner();
     setSigner(signer);
@@ -40,7 +47,17 @@ function App() {
   async function connectWallet() {
     if (window.ethereum) {
       try {
-        await provider.send("eth_requestAccounts", []);
+        await window.ethereum.request({ method: "eth_requestAccounts" });
+        if (provider.network !== "matic") {
+          await window.ethereum.request({
+            method: "wallet_addEthereumChain",
+            params: [
+              {
+                ...networks["polygon"],
+              },
+            ],
+          });
+        }
         const address = await signer.getAddress();
         console.log("Metamask Connected to " + address);
 
@@ -54,12 +71,6 @@ function App() {
     }
   }
 
-  async function createPost() {
-    const tx = await contract.createBlogPost(title, tags, content);
-    await tx.wait();
-    getUploadedPostss();
-  }
-
   async function getUploadedPostss() {
     const posts = await contract.getUploadedPosts();
     setUploadedPosts(posts);
@@ -68,12 +79,7 @@ function App() {
   return (
     <div className="App">
       <Navbar connectWallet={connectWallet} />
-      <InputBox
-        setTitle={setTitle}
-        setContent={setContent}
-        setTags={setTags}
-        createPost={createPost}
-      />
+      <InputBox getUploadedPostss={getUploadedPostss} contract={contract} />
       {uploadedPosts ? (
         uploadedPosts.map((post) => {
           return (
@@ -84,6 +90,7 @@ function App() {
               tags={post.tag}
               author={post.author}
               title={post.postTitle}
+              cid = {post.imgCID}
             />
           );
         })
