@@ -3,3 +3,9 @@
     align-items: center;
     flex-direction: column;
 }
+
+.App .contents{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+}

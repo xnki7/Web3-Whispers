@@ -3,7 +3,7 @@ import "./App.css";
 import Navbar from "./components/Navbar.jsx";
 import InputBox from "./components/InputBox";
 import Post from "./components/Post";
-import PostModal from "./components/PostModal";
+import LeftCom from "./components/LeftCom";
 import { contractAddress, contractAbi } from "./constant/constant";
 import { ethers } from "ethers";
 
@@ -19,9 +19,9 @@ function App() {
     loadBcData();
   }, []);
 
-  function togglePop(){
+  function togglePop() {
     // setToggle(true);
-    toggle ? setToggle(false) : setToggle(true)
+    toggle ? setToggle(false) : setToggle(true);
   }
 
   const networks = {
@@ -87,36 +87,34 @@ function App() {
     <div className="App">
       <Navbar connectWallet={connectWallet} />
       <button onClick={togglePop}>Create Post</button>
-      {toggle && (<InputBox getUploadedPostss={getUploadedPostss} contract={contract} />)}
-      {uploadedPosts ? (
-        uploadedPosts.slice(0).reverse().map((post) => {
-          return (
-            <Post
-              contract={contract}
-              id={post.id}
-              content={post.content}
-              tags={post.tag}
-              author={post.author}
-              title={post.postTitle}
-              cid = {post.imgCID}
-            />
-          );
-        })
-      ) : (
-        <p>Connect Wallet to see posts.</p>
+      {toggle && (
+        <InputBox getUploadedPostss={getUploadedPostss} contract={contract} />
       )}
-      {/* {uploadedPosts.map((post) => {
-        return (
-          <Post
-            contract={contract}
-            id={post.id}
-            content={post.content}
-            tags={post.tag}
-            author={post.author}
-            title={post.postTitle}
-          />
-        );
-      })} */}
+      <div className="contents">
+        <LeftCom />
+        <div className="posts">
+          {uploadedPosts ? (
+            uploadedPosts
+              .slice(0)
+              .reverse()
+              .map((post) => {
+                return (
+                  <Post
+                    contract={contract}
+                    id={post.id}
+                    content={post.content}
+                    tags={post.tag}
+                    author={post.author}
+                    title={post.postTitle}
+                    cid={post.imgCID}
+                  />
+                );
+              })
+          ) : (
+            <p>Connect Wallet to see posts.</p>
+          )}
+        </div>
+      </div>
     </div>
   );
 }
