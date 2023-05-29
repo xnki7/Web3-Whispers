@@ -3,7 +3,6 @@
   position: fixed;
   display: flex;
   width: 100%;
-  z-index: 2;
   align-items: center;
   justify-content: space-between;
   width: 100%;
@@ -41,7 +40,7 @@
 }
 
 .connect-wallet:active {
-  background-color: #fcf414;
+  background-color: #FFF4E3;
   box-shadow: none;
   transform: translateY(4px);
 }

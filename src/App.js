@@ -85,7 +85,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar connectWallet={connectWallet} />
+      <Navbar connectWallet={connectWallet} account={account} />
       <button onClick={togglePop}>Create Post</button>
       {toggle && (
         <InputBox getUploadedPostss={getUploadedPostss} contract={contract} />
