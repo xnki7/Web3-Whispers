@@ -1,4 +1,4 @@
-const contractAddress = "0x13d7f77C8784Eb4C0678fE8367F7Df51Ec071Db6";
+const contractAddress = "0x367E91348c477A9852F217D0D520f3723CB57df5";
 
 const contractAbi = [
   {
@@ -32,6 +32,29 @@ const contractAbi = [
   {
     inputs: [
       {
+        internalType: "string",
+        name: "_userName",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_bio",
+        type: "string",
+      },
+      {
+        internalType: "string",
+        name: "_profilePicCID",
+        type: "string",
+      },
+    ],
+    name: "createProfile",
+    outputs: [],
+    stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
         internalType: "uint256",
         name: "_postId",
         type: "uint256",
@@ -50,12 +73,72 @@ const contractAbi = [
         type: "uint256",
       },
     ],
+    name: "getIfLiked",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "uint256",
+        name: "_postId",
+        type: "uint256",
+      },
+    ],
     name: "getLikes",
     outputs: [
       {
         internalType: "uint256",
         name: "",
         type: "uint256",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_add",
+        type: "address",
+      },
+    ],
+    name: "getProfile",
+    outputs: [
+      {
+        components: [
+          {
+            internalType: "address",
+            name: "userAdd",
+            type: "address",
+          },
+          {
+            internalType: "string",
+            name: "userName",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "bio",
+            type: "string",
+          },
+          {
+            internalType: "string",
+            name: "profilePicCID",
+            type: "string",
+          },
+        ],
+        internalType: "struct BlogFactory.Profile",
+        name: "",
+        type: "tuple",
       },
     ],
     stateMutability: "view",
