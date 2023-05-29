@@ -85,8 +85,7 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar connectWallet={connectWallet} />
-
+      <Navbar connectWallet={connectWallet} account={account} />
       <div className="contents">
         <LeftCom />
         <div className="posts">

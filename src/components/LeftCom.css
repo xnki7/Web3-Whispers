@@ -3,8 +3,8 @@
   width: 22%;
   margin-left: 4vh;
   margin-top: 4vh;
-  height: 83vh;
-  position: fixed;
+  height: 80vh;
+  /* position: fixed; */
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -40,7 +40,7 @@
   height: 11vh;
   width: 11vh;
   padding: 0;
-  position: fixed;
+  /* position: fixed; */
 }
 
 .LeftCom .createPostBtn{
