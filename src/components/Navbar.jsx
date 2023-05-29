@@ -1,11 +1,12 @@
 import React from 'react'
 import "./Navbar.css"
+import logo from '../imgs/logo.png'
 
 function Navbar({connectWallet}) {
   return (
     <div className='Navbar'>
-        <h1>Wagmi🔰Logs</h1>
-        <button onClick={connectWallet}>Connect Wallet</button>
+        <img className='logo' src={logo} alt="" />
+        <button className='connect-wallet' onClick={connectWallet}>Connect Wallet</button>
     </div>
   )
 }
