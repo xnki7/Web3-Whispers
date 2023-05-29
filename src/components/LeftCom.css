@@ -4,11 +4,13 @@
   margin-left: 4vh;
   margin-top: 4vh;
   height: 80vh;
-  /* position: fixed; */
+  position: fixed;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
+  top: 12.5vh;
+  z-index: 2;
 }
 
 .LeftCom .leftCard {

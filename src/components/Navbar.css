@@ -1,12 +1,14 @@
 .Navbar {
   margin: 0;
-  /* position: fixed; */
+  position: fixed;
   display: flex;
   width: 100%;
   align-items: center;
   justify-content: space-between;
   width: 100%;
   background-color: #F5DDB7;
+  height: 12.5vh;
+  z-index: 2;
 }
 
 .logo{

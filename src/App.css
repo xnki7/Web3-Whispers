@@ -1,12 +1,11 @@
-.App{
-    display: flex;
-    align-items: center;
-    flex-direction: column;
-    background-color: #FFF5E5;
+.App {
+  background-color: #fff5e5;
 }
 
-.App .contents{
-    width: 100%;
-    display: flex;
-    justify-content: space-between;
+.App .contents .posts {
+  position: relative;
+  top: 16.5vh;
+  left: 27%;
+  width: 100%;
+  /* position: sticky; */
 }
