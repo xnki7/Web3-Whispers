@@ -1,16 +1,24 @@
 import React from 'react'
+import "./PostModal.css"
 
-function PostModal({title, author,content, tags,likes, likePost, togglePop}) {
+function PostModal({title, author,content, tags,likes, likePost, togglePop, cid}) {
   return (
     <div className='PostModal'>
-      <div className="PostModal__details">
-        <button onClick={togglePop}>X</button>
-        <h2>{title}</h2>
-        <p>{author}</p>
-        <h4>{tags}</h4>
-        <h3>{content}</h3>
-        <h4>{likes}</h4>
-        <button onClick={likePost}>like</button>
+      <div className="header">
+      <img src={`https://gateway.ipfs.io/ipfs/${cid}`} alt="" />
+      <div className="close">
+        <p>X</p>
+      </div>
+      <div className="title">
+        <h1>{title}</h1>
+        <p>By: {author}</p>
+      </div>
+      <div className="content">
+        <p>{content}</p>
+      </div>
+      <div className="tags">
+        <p>{tags}</p>
+      </div>
       </div>
     </div>
   )

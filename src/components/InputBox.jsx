@@ -64,7 +64,7 @@ function InputBox({ contract, getUploadedPostss, togglePop }) {
   return (
     <div className="InputBox">
       <div className="header">
-        <p onClick={togglePop}>&times;</p>
+        <p onClick={togglePop}>X</p>
       </div>
       <div className="entry">
         <input

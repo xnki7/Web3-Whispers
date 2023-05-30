@@ -2,37 +2,29 @@ import React, { useEffect, useState } from "react";
 import "./Post.css";
 import PostModal from "./PostModal";
 
-function Post({ contract, content, tags, author, title, id, cid }) {
+function Post({ contract, content, tags, author, title, id, cid, togglePop1, togglePost }) {
   const [likes, setLikes] = useState(null);
-  const [toggle, setToggle] = useState(false);
+ 
 
   useEffect(() => {
     getLikes();
   });
 
-  function togglePop() {
-    // setToggle(true);
-    toggle ? setToggle(false) : setToggle(true);
-  }
+  
 
-  // function closeTogglePop(){
-  //   setToggle(false);
-  // }
-
-  const likePost = async ()=>{
+  const likePost = async () => {
     const tx = await contract.likePost(id);
     await tx.wait();
-    // window.location.reload();
     getLikes();
-  }
+  };
 
-  const getLikes = async ()=>{
+  const getLikes = async () => {
     const like = await contract.getLikes(id);
     setLikes(parseInt(like));
-  }
+  };
 
   return (
-    <div className="Post" onClick={togglePop}>
+    <div className="Post" onClick={togglePop1}>
       <div className="leftContent">
         <img src={`https://gateway.ipfs.io/ipfs/${cid}`} alt="" />
       </div>
@@ -105,9 +97,22 @@ function Post({ contract, content, tags, author, title, id, cid }) {
           </div>
           <p>{likes}</p>
         </div>
+        {togglePost && (
+          <>
+            <PostModal
+              title={title}
+              author={author}
+              content={content}
+              tags={tags}
+              likes={likes}
+              likePost={likePost}
+              togglePop1={togglePop1}
+              cid={cid}
+            />
+            
+          </>
+        )}
       </div>
-      
-      {toggle && (<PostModal title={title} author={author} content={content} tags={tags} likes={likes} likePost={likePost} togglePop={togglePop}/>)}
     </div>
   );
 }

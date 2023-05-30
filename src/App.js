@@ -14,10 +14,15 @@ function App() {
   const [contract, setContract] = useState(null);
   const [uploadedPosts, setUploadedPosts] = useState(null);
   const [toggle, setToggle] = useState(false);
+  const [togglePost, setTogglePost] = useState(false);
 
   useEffect(() => {
     loadBcData();
   }, []);
+
+  function togglePop1() {
+    togglePost ? setTogglePost(false) : setTogglePost(true);
+  }
 
   function togglePop() {
     // setToggle(true);
@@ -103,6 +108,8 @@ function App() {
                     author={post.author}
                     title={post.postTitle}
                     cid={post.imgCID}
+                    togglePop1={togglePop1}
+                    togglePost={togglePost}
                   />
                 );
               })
@@ -113,10 +120,15 @@ function App() {
       </div>
       {toggle && (
         <>
-          <InputBox getUploadedPostss={getUploadedPostss} contract={contract} togglePop={togglePop}/>
+          <InputBox
+            getUploadedPostss={getUploadedPostss}
+            contract={contract}
+            togglePop={togglePop}
+          />
           <div className="overlay" onClick={togglePop}></div>
         </>
       )}
+      {togglePost && <div className="overlay" onClick={togglePop1}></div>}
     </div>
   );
 }
