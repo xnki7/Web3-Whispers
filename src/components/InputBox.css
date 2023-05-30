@@ -10,6 +10,8 @@
   left: 50%;
   transform: translate(-50%, -50%);
   width: 70%;
+  max-height: calc(100vh - 210px);
+  overflow-y: auto;
 
   background-color: white;
   /* padding: 6rem;
@@ -78,12 +80,12 @@
   margin-bottom: 1rem;
 }
 
-.fileUpload p{
+.fileUpload p {
   font-size: 2rem;
   margin-left: 1.5rem;
 }
 
-.fileUpload input{
+.fileUpload input {
   margin: auto;
   color: #946c2c;
 }

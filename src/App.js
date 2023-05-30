@@ -3,6 +3,7 @@ import "./App.css";
 import Navbar from "./components/Navbar.jsx";
 import InputBox from "./components/InputBox";
 import Post from "./components/Post";
+import PostModal from "./components/PostModal";
 import LeftCom from "./components/LeftCom";
 import { contractAddress, contractAbi } from "./constant/constant";
 import { ethers } from "ethers";
@@ -88,6 +89,7 @@ function App() {
     setUploadedPosts(posts);
   }
 
+
   return (
     <div className="App">
       <Navbar connectWallet={connectWallet} account={account} />
@@ -128,7 +130,10 @@ function App() {
           <div className="overlay" onClick={togglePop}></div>
         </>
       )}
+      <>
+
       {togglePost && <div className="overlay" onClick={togglePop1}></div>}
+      </>
     </div>
   );
 }

@@ -25,6 +25,7 @@ function Post({ contract, content, tags, author, title, id, cid, togglePop1, tog
 
   return (
     <div className="Post" onClick={togglePop1}>
+    
       <div className="leftContent">
         <img src={`https://gateway.ipfs.io/ipfs/${cid}`} alt="" />
       </div>
