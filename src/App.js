@@ -3,10 +3,10 @@ import "./App.css";
 import Navbar from "./components/Navbar.jsx";
 import InputBox from "./components/InputBox";
 import Post from "./components/Post";
-import PostModal from "./components/PostModal";
 import LeftCom from "./components/LeftCom";
 import { contractAddress, contractAbi } from "./constant/constant";
 import { ethers } from "ethers";
+import PostModal from "./components/PostModal";
 
 function App() {
   const [provider, setProvider] = useState(null);
@@ -15,20 +15,19 @@ function App() {
   const [contract, setContract] = useState(null);
   const [uploadedPosts, setUploadedPosts] = useState(null);
   const [toggle, setToggle] = useState(false);
-  const [togglePost, setTogglePost] = useState(false);
+  const [selectedPost, setSelectedPost] = useState(null);
 
   useEffect(() => {
     loadBcData();
   }, []);
 
-  function togglePop1() {
-    togglePost ? setTogglePost(false) : setTogglePost(true);
-  }
+  const togglePop1 = () => {
+    setToggle(false);
+  };
 
-  function togglePop() {
-    // setToggle(true);
-    toggle ? setToggle(false) : setToggle(true);
-  }
+  const togglePop = () => {
+    setToggle(!toggle);
+  };
 
   const networks = {
     polygon: {
@@ -45,50 +44,48 @@ function App() {
   };
 
   async function loadBcData() {
-    const provider = new ethers.providers.Web3Provider(window.ethereum, "any");
-    setProvider(provider);
-    const signer = provider.getSigner();
-    setSigner(signer);
-    const contractInstance = new ethers.Contract(
-      contractAddress,
-      contractAbi,
-      signer
-    );
-    setContract(contractInstance);
+    if (window.ethereum) {
+      const provider = new ethers.providers.Web3Provider(
+        window.ethereum,
+        "any"
+      );
+      setProvider(provider);
+      const signer = provider.getSigner();
+      setSigner(signer);
+      const contractInstance = new ethers.Contract(
+        contractAddress,
+        contractAbi,
+        signer
+      );
+      setContract(contractInstance);
+    }
   }
 
   async function connectWallet() {
     if (window.ethereum) {
       try {
         await window.ethereum.request({ method: "eth_requestAccounts" });
-        if (provider.network !== "matic") {
+        if (provider.network.chainId !== networks.polygon.chainId) {
           await window.ethereum.request({
             method: "wallet_addEthereumChain",
-            params: [
-              {
-                ...networks["polygon"],
-              },
-            ],
+            params: [networks.polygon],
           });
         }
         const address = await signer.getAddress();
         console.log("Metamask Connected to " + address);
 
-        console.log(contract);
         setAccount(address);
-        console.log(account);
-        getUploadedPostss();
+        getUploadedPosts();
       } catch (err) {
         console.log(err);
       }
     }
   }
 
-  async function getUploadedPostss() {
+  async function getUploadedPosts() {
     const posts = await contract.getUploadedPosts();
     setUploadedPosts(posts);
   }
-
 
   return (
     <div className="App">
@@ -100,21 +97,15 @@ function App() {
             uploadedPosts
               .slice(0)
               .reverse()
-              .map((post) => {
-                return (
-                  <Post
-                    contract={contract}
-                    id={post.id}
-                    content={post.content}
-                    tags={post.tag}
-                    author={post.author}
-                    title={post.postTitle}
-                    cid={post.imgCID}
-                    togglePop1={togglePop1}
-                    togglePost={togglePost}
-                  />
-                );
-              })
+              .map((post) => (
+                <Post
+                  key={post.id}
+                  contract={contract}
+                  post={post}
+                  togglePop1={togglePop1}
+                  setSelectedPost={setSelectedPost}
+                />
+              ))
           ) : (
             <p>Connect Wallet to see posts.</p>
           )}
@@ -123,17 +114,23 @@ function App() {
       {toggle && (
         <>
           <InputBox
-            getUploadedPostss={getUploadedPostss}
+            getUploadedPosts={getUploadedPosts}
             contract={contract}
             togglePop={togglePop}
           />
           <div className="overlay" onClick={togglePop}></div>
         </>
       )}
-      <>
-
-      {togglePost && <div className="overlay" onClick={togglePop1}></div>}
-      </>
+      {selectedPost && (
+        <>
+          <PostModal
+            post={selectedPost}
+            contract={contract}
+            setSelectedPost={setSelectedPost}
+          />
+          <div className="overlay" onClick={() => setSelectedPost(null)}></div>
+        </>
+      )}
     </div>
   );
 }

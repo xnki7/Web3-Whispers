@@ -14,14 +14,14 @@
   align-items: center;
 }
 
-.PostModal .header{
+.PostModal .header {
   width: 100%;
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-.PostModal .close{
+.PostModal .close {
   width: 100%;
   display: flex;
   justify-content: left;
@@ -29,9 +29,7 @@
   height: 10vh;
 }
 
-
-
-.PostModal .close p{
+.PostModal .close p {
   margin: 0;
   font-size: 2.5rem;
   font-weight: 600;
@@ -39,18 +37,8 @@
   margin-top: 1.5rem;
 }
 
-.PostModal .header img{
+.PostModal .header img {
   height: 30vh;
   width: auto;
 }
 
-.overlay {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.6);
-  backdrop-filter: blur(3px);
-  z-index: 5;
-}

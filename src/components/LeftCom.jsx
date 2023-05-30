@@ -152,6 +152,4 @@ function LeftCom({ togglePop }) {
 }
 
 export default LeftCom;
-{
-  /* getUploadedPostss={getUploadedPostss} contract={contract} */
-}
+

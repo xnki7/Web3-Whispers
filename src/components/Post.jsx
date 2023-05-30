@@ -1,70 +1,52 @@
 import React, { useEffect, useState } from "react";
 import "./Post.css";
-import PostModal from "./PostModal";
 
-function Post({ contract, content, tags, author, title, id, cid, togglePop1, togglePost }) {
+function Post({ contract, post, togglePop1, setSelectedPost}) {
   const [likes, setLikes] = useState(null);
- 
 
   useEffect(() => {
     getLikes();
-  });
-
-  
+  }, []);
 
   const likePost = async () => {
-    const tx = await contract.likePost(id);
+    const tx = await contract.likePost(post.id);
     await tx.wait();
     getLikes();
   };
 
   const getLikes = async () => {
-    const like = await contract.getLikes(id);
+    const like = await contract.getLikes(post.id);
     setLikes(parseInt(like));
   };
 
+  const handleClick = () => {
+    setSelectedPost(post);
+  };
+
   return (
-    <div className="Post" onClick={togglePop1}>
-    
+    <div className="Post" onClick={handleClick}>
       <div className="leftContent">
-        <img src={`https://gateway.ipfs.io/ipfs/${cid}`} alt="" />
+        <img src={`https://gateway.ipfs.io/ipfs/${post.imgCID}`} alt="" />
       </div>
       <div className="rightContent">
-        <h1>{title}</h1>
+        <h1>{post.postTitle}</h1>
         <div className="authorInfo">
           <div className="left">
-            {/* eslint-disable-next-line */}
-            <img className="profileImage" src={require("./images/bhai.png")} />
+            <img
+              className="profileImage"
+              src={require("./images/bhai.png")}
+              alt="Profile"
+            />
           </div>
           <div className="right">
             <p>Ankit Gupta</p>
-            <p>{author}</p>
+            <p>{post.author}</p>
           </div>
         </div>
-        {/* <div className="entry">
-          <h5>Content :</h5>
-          <p>{content}</p>
-        </div> */}
-        <p className="tags"># {tags}</p>
+        <p className="tags">{post.tag}</p>
         <hr />
-        {/* <div className="entry">
-          <h5>Likes :</h5>
-          <p>{likes}</p>
-        </div> */}
-        {/* <button
-          onClick={() => {
-            likePost();
-          }}
-        >
-          Like
-        </button> */}
         <div className="likeButton">
-          <div
-            className="con-like"
-            onClick={() => {
-              likePost();
-            }}
-          >
+          <div className="con-like" onClick={likePost}>
             <input title="like" type="checkbox" className="like" />
             <div className="checkmark">
               <svg
@@ -98,21 +80,6 @@ function Post({ contract, content, tags, author, title, id, cid, togglePop1, tog
           </div>
           <p>{likes}</p>
         </div>
-        {togglePost && (
-          <>
-            <PostModal
-              title={title}
-              author={author}
-              content={content}
-              tags={tags}
-              likes={likes}
-              likePost={likePost}
-              togglePop1={togglePop1}
-              cid={cid}
-            />
-            
-          </>
-        )}
       </div>
     </div>
   );

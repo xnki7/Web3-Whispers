@@ -1,34 +1,41 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./PostModal.css";
 
-function PostModal({
-  title,
-  author,
-  content,
-  tags,
-  likes,
-  likePost,
-  togglePop1,
-  cid,
-}) {
+function PostModal({ post, onClose, contract }) {
+  const [likes, setLikes] = useState(null);
+
+  useEffect(() => {
+    getLikes();
+  }, []);
+
+  const likePost = async () => {
+    const tx = await contract.likePost(post.id);
+    await tx.wait();
+    getLikes();
+  };
+
+  const getLikes = async () => {
+    const like = await contract.getLikes(post.id);
+    setLikes(parseInt(like));
+  };
+
   return (
     <div className="PostModal">
       <div className="close">
-        <p onClick={togglePop1}>X</p>
+        <p onClick={onClose}>X</p>
       </div>
       <div className="header">
-        <img src={`https://gateway.ipfs.io/ipfs/${cid}`} alt="" />
+        <img src={`https://gateway.ipfs.io/ipfs/${post.imgCID}`} alt="" />
       </div>
-
       <div className="title">
-        <h1>{title}</h1>
-        <p>By: {author}</p>
+        <h1>{post.postTitle}</h1>
+        <p>By: {post.author}</p>
       </div>
       <div className="content">
-        <p>{content}</p>
+        <p>{post.content}</p>
       </div>
       <div className="tags">
-        <p>{tags}</p>
+        <p>{post.tag}</p>
         <div className="like">
           <button onClick={likePost}>Like</button>
           <p>{likes}</p>
