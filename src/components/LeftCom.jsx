@@ -1,7 +1,7 @@
 import React from "react";
 import "./LeftCom.css";
 
-function LeftCom() {
+function LeftCom({ togglePop }) {
   return (
     <div className="LeftCom">
       <div className="leftCard">
@@ -18,7 +18,7 @@ function LeftCom() {
         </div>
       </div>
       <div className="createPostBtn">
-        <button>
+        <button onClick={togglePop}>
           Create Post
           <div className="icon-1">
             <svg
@@ -152,3 +152,6 @@ function LeftCom() {
 }
 
 export default LeftCom;
+{
+  /* getUploadedPostss={getUploadedPostss} contract={contract} */
+}

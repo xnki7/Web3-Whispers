@@ -1,18 +1,26 @@
-.InputBox .entry{
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.InputBox .entry {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.InputBox{
-    width: 60rem;
-    border: 2px solid black;
-    margin: auto;
+.InputBox {
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 70%;
+
+  background-color: white;
+  /* padding: 6rem;
+  /* border-radius: 5px; */
+  box-shadow: 0 3rem 5rem rgba(0, 0, 0, 0.3);
+  z-index: 10;
 }
 
-.InputBox button{
-    width: 6rem;
-    margin: auto;
-    margin-top: 1rem;
-    margin-bottom: 1rem;
+.InputBox button {
+  width: 6rem;
+  margin: auto;
+  margin-top: 1rem;
+  margin-bottom: 1rem;
 }

@@ -87,7 +87,7 @@ function App() {
     <div className="App">
       <Navbar connectWallet={connectWallet} account={account} />
       <div className="contents">
-        <LeftCom />
+        <LeftCom togglePop={togglePop} toggle={toggle} />
         <div className="posts">
           {uploadedPosts ? (
             uploadedPosts
@@ -111,9 +111,11 @@ function App() {
           )}
         </div>
       </div>
-      <button onClick={togglePop}>Create Post</button>
       {toggle && (
-        <InputBox getUploadedPostss={getUploadedPostss} contract={contract} />
+        <>
+          <InputBox getUploadedPostss={getUploadedPostss} contract={contract} />
+          <div className="overlay"></div>
+        </>
       )}
     </div>
   );
