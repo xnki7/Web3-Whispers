@@ -113,8 +113,8 @@ function App() {
       </div>
       {toggle && (
         <>
-          <InputBox getUploadedPostss={getUploadedPostss} contract={contract} />
-          <div className="overlay"></div>
+          <InputBox getUploadedPostss={getUploadedPostss} contract={contract} togglePop={togglePop}/>
+          <div className="overlay" onClick={togglePop}></div>
         </>
       )}
     </div>

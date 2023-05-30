@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./InputBox.css";
 import axios from "axios";
 
-function InputBox({ contract, getUploadedPostss }) {
+function InputBox({ contract, getUploadedPostss, togglePop }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
@@ -63,21 +63,40 @@ function InputBox({ contract, getUploadedPostss }) {
 
   return (
     <div className="InputBox">
+      <div className="header">
+        <p onClick={togglePop}>&times;</p>
+      </div>
       <div className="entry">
-        <h3>Title :</h3>
         <input
+          placeholder="Title..."
           type="text"
-          class="input"
+          class="title"
           onChange={(e) => {
             setTitle(e.target.value);
           }}
         />
       </div>
+      <hr />
+
       <div className="entry">
-        <h3>Tags :</h3>
+        <textarea
+          placeholder="Write Your Blog..."
+          name=""
+          id=""
+          // cols="30"
+          class="textarea"
+          // rows="10"
+          onChange={(e) => {
+            setContent(e.target.value);
+          }}
+        ></textarea>
+      </div>
+      <hr />
+      <div className="entry">
         <input
           type="text"
-          class="input"
+          class="title"
+          placeholder="Tags..."
           onChange={(e) => {
             setTags(e.target.value);
           }}
@@ -85,28 +104,21 @@ function InputBox({ contract, getUploadedPostss }) {
           id=""
         />
       </div>
-      <div className="entry">
-        <h3>Content :</h3>
-        <textarea
-          name=""
-          id=""
-          cols="30"
-          class="input"
-          rows="10"
-          onChange={(e) => {
-            setContent(e.target.value);
-          }}
-        ></textarea>
-      </div>
-      <div>
-        <h2>Upload to IPFS via Pinata</h2>
+      <hr />
+      <div className="fileUpload">
+        <p className="uploadImage">Upload an image</p>
         <input type="file" onChange={handleFileChange} />
-        <button onClick={handleUpload} disabled={!selectedFile || uploading}>
+        <button
+          className="entry button"
+          onClick={handleUpload}
+          disabled={!selectedFile || uploading}
+        >
           {uploading ? "Uploading..." : "Upload"}
         </button>
-        {uploading && <div>Loading...</div>}
       </div>
-      <button className="entry" onClick={createPost}>
+      {uploading && <div>Loading...</div>}
+      <hr />
+      <button class="entry cyberpunk-button" onClick={createPost}>
         Submit
       </button>
     </div>
