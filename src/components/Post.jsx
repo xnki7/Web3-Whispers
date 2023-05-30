@@ -19,14 +19,14 @@ function Post({ contract, content, tags, author, title, id, cid }) {
   //   setToggle(false);
   // }
 
-  async function likePost() {
+  const likePost = async ()=>{
     const tx = await contract.likePost(id);
     await tx.wait();
     // window.location.reload();
     getLikes();
   }
 
-  async function getLikes() {
+  const getLikes = async ()=>{
     const like = await contract.getLikes(id);
     setLikes(parseInt(like));
   }
@@ -106,6 +106,8 @@ function Post({ contract, content, tags, author, title, id, cid }) {
           <p>{likes}</p>
         </div>
       </div>
+      
+      {toggle && (<PostModal title={title} author={author} content={content} tags={tags} likes={likes} likePost={likePost} togglePop={togglePop}/>)}
     </div>
   );
 }
