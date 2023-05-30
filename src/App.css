@@ -1,5 +1,5 @@
 .App {
-  background-color: #fff5e5;
+
   height: max-content;
 }
 
@@ -9,7 +9,9 @@
   left: 27%;
   width: 100%;
   /* padding-bottom: 20rem; */
-  /* position: sticky; */
+  position: fixed;
+  overflow-y: auto;
+  max-height: calc(100vh - 20vh);
 }
 
 .App .overlay{
