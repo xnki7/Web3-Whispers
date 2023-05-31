@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import "./InputBox.css";
 import axios from "axios";
 
-function InputBox({ contract, getUploadedPostss, togglePop }) {
+function InputBox({ contract, getUploadedPosts, togglePop }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
 
@@ -15,7 +15,7 @@ function InputBox({ contract, getUploadedPostss, togglePop }) {
     // handleUpload();
     const tx = await contract.createBlogPost(title, tags, content, cid);
     await tx.wait();
-    getUploadedPostss();
+    getUploadedPosts();
     // emptyState();
   }
 

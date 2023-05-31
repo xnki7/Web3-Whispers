@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./PostModal.css";
 
-function PostModal({ post, onClose, contract }) {
+function PostModal({ post, setSelectedPost, contract }) {
   const [likes, setLikes] = useState(null);
 
   useEffect(() => {
@@ -21,8 +21,13 @@ function PostModal({ post, onClose, contract }) {
 
   return (
     <div className="PostModal">
-      <div className="close">
-        <p onClick={onClose}>X</p>
+      <div
+        className="close"
+        onClick={() => {
+          setSelectedPost(null);
+        }}
+      >
+        <p>X</p>
       </div>
       <div className="header">
         <img src={`https://gateway.ipfs.io/ipfs/${post.imgCID}`} alt="" />
