@@ -6,6 +6,7 @@ function PostModal({ post, setSelectedPost, contract }) {
 
   useEffect(() => {
     getLikes();
+    // eslint-disable-next-line
   }, []);
 
   const likePost = async () => {

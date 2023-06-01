@@ -66,11 +66,15 @@ function InputBox({ contract, getUploadedPosts, togglePop }) {
       <div className="header">
         <p onClick={togglePop}>X</p>
       </div>
+      <div>
+        <p>** All feilds must be filled in order to submit the form **</p>
+      </div>
       <div className="entry">
         <input
           placeholder="Title..."
           type="text"
           class="title"
+          required="required"
           onChange={(e) => {
             setTitle(e.target.value);
           }}
@@ -83,6 +87,7 @@ function InputBox({ contract, getUploadedPosts, togglePop }) {
           placeholder="Write Your Blog..."
           name=""
           id=""
+          required="required"
           // cols="30"
           class="textarea"
           // rows="10"
