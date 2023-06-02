@@ -1,4 +1,4 @@
-const contractAddress = "0x367E91348c477A9852F217D0D520f3723CB57df5";
+const contractAddress = "0x9eCA53E8A6Fb95683F656BB85C73b0E05fb949A2";
 
 const contractAbi = [
   {
@@ -63,6 +63,44 @@ const contractAbi = [
     name: "likePost",
     outputs: [],
     stateMutability: "nonpayable",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_add",
+        type: "address",
+      },
+    ],
+    name: "getAuthorCID",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_add",
+        type: "address",
+      },
+    ],
+    name: "getAuthorName",
+    outputs: [
+      {
+        internalType: "string",
+        name: "",
+        type: "string",
+      },
+    ],
+    stateMutability: "view",
     type: "function",
   },
   {
@@ -189,6 +227,25 @@ const contractAbi = [
         internalType: "struct BlogFactory.Post[]",
         name: "",
         type: "tuple[]",
+      },
+    ],
+    stateMutability: "view",
+    type: "function",
+  },
+  {
+    inputs: [
+      {
+        internalType: "address",
+        name: "_add",
+        type: "address",
+      },
+    ],
+    name: "profileCreated",
+    outputs: [
+      {
+        internalType: "bool",
+        name: "",
+        type: "bool",
       },
     ],
     stateMutability: "view",

@@ -7,26 +7,31 @@ import LeftCom from "./components/LeftCom";
 import { contractAddress, contractAbi } from "./constant/constant";
 import { ethers } from "ethers";
 import PostModal from "./components/PostModal";
+import CreateProfile from "./components/CreateProfile";
 
 function App() {
   const [provider, setProvider] = useState(null);
   const [account, setAccount] = useState(null);
   const [signer, setSigner] = useState(null);
   const [contract, setContract] = useState(null);
+  const [isConnected, setIsConnected] = useState(false);
   const [uploadedPosts, setUploadedPosts] = useState(null);
   const [toggle, setToggle] = useState(false);
   const [selectedPost, setSelectedPost] = useState(null);
+  const [toggle2, setToggle2] = useState(false);
+  const [profile, setProfile] = useState(null);
+  const [isProfileCreated, setIsProfileCreated] = useState(false);
 
   useEffect(() => {
     loadBcData();
   }, []);
 
-  const togglePop1 = () => {
-    setToggle(false);
-  };
-
   const togglePop = () => {
     setToggle(!toggle);
+  };
+
+  const togglePop2 = () => {
+    setToggle2(!toggle2);
   };
 
   const networks = {
@@ -61,6 +66,11 @@ function App() {
     }
   }
 
+  async function profileCreated(account) {
+    const tx = await contract.profileCreated(account);
+    setIsProfileCreated(tx);
+  }
+
   async function connectWallet() {
     if (window.ethereum) {
       try {
@@ -73,9 +83,11 @@ function App() {
         }
         const address = await signer.getAddress();
         console.log("Metamask Connected to " + address);
-
         setAccount(address);
         getUploadedPosts();
+        profileCreated(address);
+        getProfile(address);
+        setIsConnected(true);
       } catch (err) {
         console.log(err);
       }
@@ -85,13 +97,36 @@ function App() {
   async function getUploadedPosts() {
     const posts = await contract.getUploadedPosts();
     setUploadedPosts(posts);
+    console.log(profile);
+  }
+
+  async function getProfile(address) {
+    try {
+      const tx = await contract.getProfile(address);
+      const parsedStruct = {
+        userName: tx.userName,
+        bio: tx.bio,
+        profilePicCID: tx.profilePicCID,
+      };
+      setProfile(parsedStruct);
+      console.log(profile);
+    } catch (error) {
+      console.error("Error fetching profile:", error);
+    }
   }
 
   return (
     <div className="App">
       <Navbar connectWallet={connectWallet} account={account} />
       <div className="contents">
-        <LeftCom togglePop={togglePop} toggle={toggle} />
+        <LeftCom
+          togglePop={togglePop}
+          toggle={toggle}
+          toggle2={toggle2}
+          togglePop2={togglePop2}
+          profile={profile}
+          isProfileCreated={isProfileCreated}
+        />
         <div className="posts">
           {uploadedPosts ? (
             uploadedPosts
@@ -102,12 +137,15 @@ function App() {
                   key={post.id}
                   contract={contract}
                   post={post}
-                  togglePop1={togglePop1}
                   setSelectedPost={setSelectedPost}
+                  account={account}
                 />
               ))
           ) : (
-            <p>Connect Wallet to see posts.</p>
+            <>
+              <p>Connect Wallet to see posts.</p>
+              <p>Connect Wallet and create profile to start posting your blogs.</p>
+            </>
           )}
         </div>
       </div>
@@ -117,6 +155,8 @@ function App() {
             getUploadedPosts={getUploadedPosts}
             contract={contract}
             togglePop={togglePop}
+            isProfileCreated={isProfileCreated}
+            isConnected={isConnected}
           />
           <div className="overlay" onClick={togglePop}></div>
         </>
@@ -129,6 +169,12 @@ function App() {
             setSelectedPost={setSelectedPost}
           />
           <div className="overlay" onClick={() => setSelectedPost(null)}></div>
+        </>
+      )}
+      {toggle2 && (
+        <>
+          <CreateProfile contract={contract} />
+          <div className="overlay" onClick={togglePop2}></div>
         </>
       )}
     </div>

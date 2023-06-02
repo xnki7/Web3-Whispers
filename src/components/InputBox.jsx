@@ -12,24 +12,14 @@ function InputBox({ contract, getUploadedPosts, togglePop }) {
   const [cid, setCid] = useState(null);
 
   async function createPost() {
-    // handleUpload();
     const tx = await contract.createBlogPost(title, tags, content, cid);
     await tx.wait();
     getUploadedPosts();
-    // emptyState();
+    togglePop();
   }
-
-  // function emptyState() {
-  //   setTitle(null);
-  //   setContent(null);
-  //   setTags(null);
-  //   setCid(null);
-  //   document.getElementsByClassName("input").value = "";
-  // }
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
-    // handleUpload();
   };
 
   const handleUpload = async () => {
@@ -88,9 +78,7 @@ function InputBox({ contract, getUploadedPosts, togglePop }) {
           name=""
           id=""
           required="required"
-          // cols="30"
           class="textarea"
-          // rows="10"
           onChange={(e) => {
             setContent(e.target.value);
           }}

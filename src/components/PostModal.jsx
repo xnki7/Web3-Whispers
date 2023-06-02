@@ -3,11 +3,31 @@ import "./PostModal.css";
 
 function PostModal({ post, setSelectedPost, contract }) {
   const [likes, setLikes] = useState(null);
+  const [authorCID, setAuthorCID] = useState(null);
+  const [authorName, setAuthorName] = useState(null);
+  const [isLiked, setIsLiked] = useState(false);
 
   useEffect(() => {
     getLikes();
-    // eslint-disable-next-line
+    getAuthorCID(post.author);
+    getAuthorName(post.author);
+    getIfLiked();
   }, []);
+
+  const getAuthorCID = async (account) => {
+    const tx = await contract.getAuthorCID(account);
+    setAuthorCID(tx);
+  };
+
+  const getAuthorName = async (account) => {
+    const tx = await contract.getAuthorName(account);
+    setAuthorName(tx);
+  };
+
+  const getIfLiked = async () => {
+    const tx = await contract.getIfLiked(post.id);
+    setIsLiked(tx);
+  };
 
   const likePost = async () => {
     const tx = await contract.likePost(post.id);
@@ -35,7 +55,22 @@ function PostModal({ post, setSelectedPost, contract }) {
       </div>
       <div className="title">
         <h1>{post.postTitle}</h1>
-        <p>By: {post.author}</p>
+        <div className="authorInfo">
+          <div>
+            <p className="written">Written By :</p>
+          </div>
+          <div className="left">
+            <img
+              className="profileImage"
+              src={`https://gateway.ipfs.io/ipfs/${authorCID}`}
+              alt="Profile"
+            />
+          </div>
+          <div className="right">
+            <p>{authorName}</p>
+            <p>{post.author}</p>
+          </div>
+        </div>
       </div>
       <div className="content">
         <p>{post.content}</p>
@@ -43,7 +78,9 @@ function PostModal({ post, setSelectedPost, contract }) {
       <div className="tags">
         <p>{post.tag}</p>
         <div className="like">
-          <button onClick={likePost}>Like</button>
+          <button className="lkbtn" onClick={likePost} disabled={isLiked}>
+            <p>👍</p>
+          </button>
           <p>{likes}</p>
         </div>
       </div>

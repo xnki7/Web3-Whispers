@@ -26,6 +26,9 @@ contract BlogFactory{
     mapping(address=>mapping(uint=>bool)) isLiked; 
     mapping(uint=>uint) likeCount; 
     mapping (address => Profile) Profiles;
+    mapping (address => bool) isProfileCreated;
+    mapping (address => string) authorCID;
+    mapping (address => string) authorName;
 
     // mapping(address => bool) didLike;
     //     address[] likersAddresses;
@@ -37,7 +40,9 @@ contract BlogFactory{
         string memory _bio,
         string memory _profilePicCID
     ) public {
+        require(isProfileCreated[msg.sender] == false, "Profile already created");
         Profiles[msg.sender]=Profile(msg.sender, _userName, _bio, _profilePicCID);
+        isProfileCreated[msg.sender] = true;
     }
 
     function createBlogPost(
@@ -50,6 +55,8 @@ contract BlogFactory{
         uploadedPosts.push(newPost);
         likeCount[id] = 0;
         id++;
+        authorCID[msg.sender] = Profiles[msg.sender].profilePicCID;
+        authorName[msg.sender] = Profiles[msg.sender].userName;
     }
 
     function likePost(uint _postId) public{
@@ -70,7 +77,19 @@ contract BlogFactory{
         return isLiked[msg.sender][_postId];
     }
 
+    function profileCreated(address _add) public view returns(bool){
+        return isProfileCreated[_add];
+    }
+
     function getProfile(address _add) public view returns(Profile memory){
         return Profiles[_add];
+    }
+
+    function getAuthorCID(address _add) public view returns(string memory){
+        return authorCID[_add];
+    }
+
+    function getAuthorName(address _add) public view returns(string memory){
+        return authorName[_add];
     }
 }
