@@ -60,8 +60,9 @@
   color: #946c2c;
 }
 
-.LeftCom hr{
+.LeftCom hr {
   margin: 0;
+  border: 1.75px solid #946c2c;
 }
 
 .LeftCom .buttons {
