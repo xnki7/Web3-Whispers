@@ -1,7 +1,13 @@
 import React from "react";
 import "./LeftCom.css";
 
-function LeftCom({ togglePop, togglePop2, profile, isProfileCreated, isConnected }) {
+function LeftCom({
+  togglePop,
+  togglePop2,
+  profile,
+  isProfileCreated,
+  isConnected,
+}) {
   return (
     <div className="LeftCom">
       <div className="leftCard">
@@ -11,8 +17,8 @@ function LeftCom({ togglePop, togglePop2, profile, isProfileCreated, isConnected
             className="coverImg"
             src={require("./images/Why-Are-Gas-Fees-So-High-and-How-Can-You-Avoid-Them.jpg")}
           />
-          
-          <div className="profileImg">
+
+          {/* <div className="profileImg">
             {isProfileCreated && (
               <img
                 className="profileImage"
@@ -20,9 +26,24 @@ function LeftCom({ togglePop, togglePop2, profile, isProfileCreated, isConnected
                 alt=""
               />
             )}
+          </div> */}
+          <div className="profileImg">
+            {isProfileCreated && profile && profile.profilePicCID && (
+              <img
+                className="profileImage"
+                src={`https://gateway.ipfs.io/ipfs/${profile.profilePicCID}`}
+                alt=""
+              />
+            )}
           </div>
-          <h2>{isProfileCreated && profile.userName}</h2>
-          <p>{isProfileCreated && profile.bio}</p>
+          {/* <h2>{isProfileCreated && profile.userName}</h2>
+          <p>{isProfileCreated && profile.bio}</p> */}
+          <h2>
+            {isProfileCreated && profile && profile.userName
+              ? profile.userName
+              : ""}
+          </h2>
+          <p>{isProfileCreated && profile && profile.bio ? profile.bio : ""}</p>
         </div>
       </div>
       <div className="createPostBtn">
@@ -156,7 +177,7 @@ function LeftCom({ togglePop, togglePop2, profile, isProfileCreated, isConnected
             </div>
           </button>
         ) : (
-          <button className="createPostBtn" onClick={togglePop2} >
+          <button className="createPostBtn" onClick={togglePop2}>
             Create Profile
             <div className="icon-1">
               <svg
