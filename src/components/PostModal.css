@@ -119,3 +119,13 @@
     margin-top: 1vh;
     margin-bottom: 1vh;
 }
+
+.PostModal button{
+  width: 10vh;
+  height: 7vh;
+  margin-right: 2vh;
+}
+
+.PostModal button p{
+  font-size: x-large;
+}
