@@ -1,51 +1,58 @@
 import React from "react";
 import "./LeftCom.css";
 
-function LeftCom({
-  togglePop,
-  togglePop2,
-  profile,
-  isProfileCreated,
-  isConnected,
-}) {
+function LeftCom({ togglePop, togglePop2, profile, isProfileCreated }) {
   return (
     <div className="LeftCom">
       <div className="leftCard">
         <div className="images">
           {/* eslint-disable-next-line */}
-          <img
-            className="coverImg"
-            src={require("./images/Why-Are-Gas-Fees-So-High-and-How-Can-You-Avoid-Them.jpg")}
-          />
-
-          {/* <div className="profileImg">
-            {isProfileCreated && (
-              <img
-                className="profileImage"
-                src={`https://gateway.ipfs.io/ipfs/${profile.profilePicCID}`}
-                alt=""
-              />
-            )}
-          </div> */}
-          <div className="profileImg">
-            {isProfileCreated && profile && profile.profilePicCID && (
-              <img
-                className="profileImage"
-                src={`https://gateway.ipfs.io/ipfs/${profile.profilePicCID}`}
-                alt=""
-              />
-            )}
+          <img className="coverImg" src={require("./images/bgbg.png")} />
+          <div className="profileInfo">
+            <div className="profileImg">
+              {isProfileCreated && profile && profile.profilePicCID && (
+                <img
+                  className="profileImage"
+                  src={`https://gateway.ipfs.io/ipfs/${profile.profilePicCID}`}
+                  alt=""
+                />
+              )}
+            </div>
+            <div className="textInfo">
+              <p className="username">
+                {isProfileCreated && profile && profile.userName
+                  ? profile.userName
+                  : ""}
+              </p>
+              <p className="useraddress">
+                {isProfileCreated && profile && profile.userAdd
+                  ? profile.userAdd.slice(0, 6) +
+                    " ... " +
+                    profile.userAdd.slice(35, 42)
+                  : ""}
+              </p>
+            </div>
           </div>
-          {/* <h2>{isProfileCreated && profile.userName}</h2>
-          <p>{isProfileCreated && profile.bio}</p> */}
-          <h2>
-            {isProfileCreated && profile && profile.userName
-              ? profile.userName
-              : ""}
-          </h2>
-          <p>{isProfileCreated && profile && profile.bio ? profile.bio : ""}</p>
+          <p className="userbio">
+            {isProfileCreated && profile && profile.bio ? (
+              <p>"{profile.bio}"</p>
+            ) : (
+              ""
+            )}
+          </p>
+        </div>
+        <div className="buttons">
+          <hr />
+          {isProfileCreated && profile && profile.userName ? (
+            <p className="updateProfile" onClick={togglePop2}>
+              Update Profile
+            </p>
+          ) : (
+            ""
+          )}
         </div>
       </div>
+
       <div className="createPostBtn">
         {isProfileCreated ? (
           <button onClick={togglePop}>

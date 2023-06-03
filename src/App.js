@@ -104,6 +104,7 @@ function App() {
     try {
       const tx = await contract.getProfile(address);
       const parsedStruct = {
+        userAdd: tx.userAdd,
         userName: tx.userName,
         bio: tx.bio,
         profilePicCID: tx.profilePicCID,
@@ -144,7 +145,9 @@ function App() {
           ) : (
             <>
               <p>Connect Wallet to see posts.</p>
-              <p>Connect Wallet and create profile to start posting your blogs.</p>
+              <p>
+                Connect Wallet and create profile to start posting your blogs.
+              </p>
             </>
           )}
         </div>
@@ -173,7 +176,7 @@ function App() {
       )}
       {toggle2 && (
         <>
-          <CreateProfile contract={contract} togglePop2={togglePop2}/>
+          <CreateProfile contract={contract} togglePop2={togglePop2} />
           <div className="overlay" onClick={togglePop2}></div>
         </>
       )}

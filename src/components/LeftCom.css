@@ -22,6 +22,62 @@
   border-bottom-right-radius: 20px;
 }
 
+.LeftCom .profileInfo {
+  display: flex;
+  /* align-items: center; */
+  /* justify-content: right; */
+}
+
+.LeftCom .textInfo {
+  position: relative;
+  right: -4vh;
+  top: 0vh;
+}
+
+.LeftCom .images {
+  height: 100%;
+}
+
+.LeftCom p.username {
+  font-size: 1.5rem;
+  font-weight: 500;
+  margin-top: 0;
+  color: #644b23;
+}
+
+.LeftCom p.updateProfile {
+  text-align: center;
+  font-family: "Inter";
+  font-style: normal;
+  font-weight: 600;
+  font-size: x-large;
+  margin: 0;
+  padding: 2vh;
+  cursor: pointer;
+}
+
+.LeftCom p.useraddress {
+  color: #946c2c;
+}
+
+.LeftCom hr{
+  margin: 0;
+}
+
+.LeftCom .buttons {
+  position: relative;
+  bottom: 8vh;
+}
+
+.LeftCom p.userbio {
+  padding-left: 1.25rem;
+  padding-right: 1.25rem;
+  font-style: italic;
+  font-size: larger;
+  color: #644b23;
+  /* font-family: "Inter"; */
+}
+
 .LeftCom .coverImg {
   width: 100%;
   height: 17vh;
@@ -43,6 +99,10 @@
   width: 11vh;
   padding: 0;
   /* position: fixed; */
+}
+
+.LeftCom .profileInfo {
+  max-height: 10vh;
 }
 
 .LeftCom .createPostBtn {
