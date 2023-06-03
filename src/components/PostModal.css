@@ -60,6 +60,7 @@
 
 .PostModal .close p {
   color: white;
+  cursor: pointer;
 }
 
 .PostModal .header {

@@ -173,7 +173,7 @@ function App() {
       )}
       {toggle2 && (
         <>
-          <CreateProfile contract={contract} />
+          <CreateProfile contract={contract} togglePop2={togglePop2}/>
           <div className="overlay" onClick={togglePop2}></div>
         </>
       )}
