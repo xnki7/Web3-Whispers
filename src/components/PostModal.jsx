@@ -40,50 +40,50 @@ function PostModal({ post, setSelectedPost, contract }) {
     setLikes(parseInt(like));
   };
 
+
+
   return (
     <div className="PostModal">
-      <div
-        className="close"
-        onClick={() => {
-          setSelectedPost(null);
-        }}
-      >
-        <p>X</p>
+
+      <div className="header" 
+      style={{backgroundImage : `url(${'https://gateway.ipfs.io/ipfs/'+post.imgCID}`,
+      backgroundRepeat: 'no-repeat',
+      width:'100%' ,
+      height:'50px'
+    }}>
       </div>
-      <div className="header">
-        <img src={`https://gateway.ipfs.io/ipfs/${post.imgCID}`} alt="" />
-      </div>
-      <div className="title">
-        <h1>{post.postTitle}</h1>
-        <div className="authorInfo">
-          <div>
-            <p className="written">Written By :</p>
-          </div>
-          <div className="left">
-            <img
+
+      <div className="stuff">
+
+        <h1 className="title">{post.postTitle}</h1>
+        <p className="tags">{post.tag}</p>
+
+      <div className="authorInfo">
+        <img
               className="profileImage"
               src={`https://gateway.ipfs.io/ipfs/${authorCID}`}
               alt="Profile"
             />
-          </div>
+
           <div className="right">
-            <p>{authorName}</p>
-            <p>{post.author}</p>
+            <p className="name">{authorName}</p>
+            <p className="add">{post.author.slice(0, 6)+'...'+post.author.slice(38, 42)}</p>
           </div>
-        </div>
       </div>
-      <div className="content">
-        <p>{post.content}</p>
+
+      <hr />
+
+      <p className="content">{post.content}</p>
+
       </div>
-      <div className="tags">
-        <p>{post.tag}</p>
-        <div className="like">
+
+      <div className="like">
           <button className="lkbtn" onClick={likePost} disabled={isLiked}>
             <p>👍</p>
           </button>
           <p>{likes}</p>
-        </div>
       </div>
+
     </div>
   );
 }
