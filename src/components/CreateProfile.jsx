@@ -2,9 +2,8 @@ import React from "react";
 import { useState } from "react";
 import axios from "axios";
 import "./CreateProfile.css";
-import { ethers } from "ethers";
 
-function CreateProfile({ contract }) {
+function CreateProfile({ contract, togglePop2 }) {
   const [selectedFile, setSelectedFile] = useState(null);
   const [uploading, setUploading] = useState(false);
   const [profileCid, setProfileCid] = useState(null);
@@ -20,7 +19,6 @@ function CreateProfile({ contract }) {
 
   const handleFileChange = (event) => {
     setSelectedFile(event.target.files[0]);
-    // handleUpload();
   };
 
   const handleUpload = async () => {
@@ -54,25 +52,34 @@ function CreateProfile({ contract }) {
 
   return (
     <div className="CreateProfile">
+      <div className="header">
+        <p onClick={togglePop2}>X</p>
+      </div>
+      <div>
+        <p>** All feilds must be filled in order to submit the form **</p>
+      </div>
       <input
         type="text"
+        className="inputBox"
         placeholder="Username"
         onChange={(e) => {
           setUsername(e.target.value);
         }}
       />
+      <hr />
       <textarea
         name=""
         id=""
         cols="30"
         rows="10"
-        placeholder="bio"
+        placeholder="Bio"
         onChange={(e) => {
           setBio(e.target.value);
         }}
       ></textarea>
+      <hr />
       <div className="fileUpload">
-        <p className="uploadImage">Upload an image</p>
+        <p className="uploadImage">Upload profile image</p>
         <input type="file" onChange={handleFileChange} />
         <button
           className="entry button"
@@ -83,9 +90,12 @@ function CreateProfile({ contract }) {
         </button>
       </div>
       {uploading && <div>Loading...</div>}
-      <button class="entry cyberpunk-button" onClick={createProfile}>
-        Submit
-      </button>
+      <hr />
+      <div className="submitDiv">
+        <button class="entry cyberpunk-button" onClick={createProfile}>
+          Submit
+        </button>
+      </div>
     </div>
   );
 }
