@@ -11,6 +11,7 @@ function Post({ contract, post, setSelectedPost, account }) {
     getLikes();
     getAuthorCID(post.author);
     getAuthorName(post.author);
+    getIfLiked();
   }, []);
 
   const likePost = async () => {
@@ -20,10 +21,10 @@ function Post({ contract, post, setSelectedPost, account }) {
     getIfLiked();
   };
 
-  const getIfLiked = async()=>{
+  const getIfLiked = async () => {
     const tx = await contract.getIfLiked(post.id);
     setIsLiked(tx);
-  }
+  };
 
   const getAuthorCID = async (account) => {
     const tx = await contract.getAuthorCID(account);
