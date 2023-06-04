@@ -36,8 +36,8 @@
   background-color: #4e832e;
 }
 
-.likeButton button:disabled,
-.likeButton button[disabled] {
+.like button:disabled,
+.like button[disabled] {
   border: 1px solid #999999;
   background-color: #cccccc;
   color: #666666;
