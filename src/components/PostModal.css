@@ -17,20 +17,21 @@
   padding: 0px;
 }
 
-.PostModal .header{
+.PostModal .header {
   display: flex;
   justify-content: center;
   align-items: center;
+  position: relative;
+  z-index: 1;
 }
 
-.PostModal .stuff{
+.PostModal .stuff {
   width: 100%;
   display: flex;
   flex-direction: column;
-;
 }
 
-.PostModal .stuff  .authorInfo {
+.PostModal .stuff .authorInfo {
   display: flex;
   align-items: center;
   justify-content: left;
@@ -42,7 +43,7 @@
   margin-left: 1vh;
 }
 
-.PostModal .stuff .authorInfo .right .name{
+.PostModal .stuff .authorInfo .right .name {
   font-style: normal;
   font-weight: 600;
   font-size: 20px;
@@ -50,11 +51,10 @@
   display: flex;
   align-items: center;
   text-align: center;
-  color: #644B23;
+  color: #644b23;
 }
 
-.PostModal .stuff .authorInfo .right .add{
-
+.PostModal .stuff .authorInfo .right .add {
   font-style: normal;
   font-weight: 300;
   font-size: 15px;
@@ -62,7 +62,7 @@
   display: flex;
   align-items: center;
   text-align: center;
-  color: #946C2C;
+  color: #946c2c;
 }
 
 .PostModal .stuff .authorInfo img {
@@ -71,7 +71,7 @@
   border-radius: 100%;
   margin-top: 1vh;
   margin-left: 2vh;
-  border: solid #946C2C 3px;
+  border: solid #946c2c 3px;
 }
 
 .PostModal .stuff .title {
@@ -80,22 +80,22 @@
   margin-bottom: 1vh;
   line-height: 60px;
   font-style: normal;
-  color: #644B23;
+  color: #644b23;
   font-weight: 700;
   font-size: 55px;
 }
 
-.PostModal .stuff .tags{
+.PostModal .stuff .tags {
   font-style: normal;
-    font-weight: 200;
-    font-size: 20px;
-    color: #946C2C;
-    margin-left: 2vh;
-    margin-top: 0vh;
-    margin-bottom: 0vh;
+  font-weight: 200;
+  font-size: 20px;
+  color: #946c2c;
+  margin-left: 2vh;
+  margin-top: 0vh;
+  margin-bottom: 0vh;
 }
 
-.PostModal .stuff .content{
+.PostModal .stuff .content {
   margin-left: 2vh;
   margin-right: 2vh;
   margin-top: 1vh;
@@ -105,27 +105,27 @@
   font-size: 18px;
 }
 
-.PostModal .stuff hr{
+.PostModal .stuff hr {
   width: 96%;
   border: 1px solid #946c2c;
   margin-left: 2vh;
   margin-right: 2vh;
 }
 
-.PostModal .like{
+.PostModal .like {
   display: flex;
-    align-items:center;
-    justify-content: left;
-    margin-top: 1vh;
-    margin-bottom: 1vh;
+  align-items: center;
+  justify-content: left;
+  margin-top: 1vh;
+  margin-bottom: 1vh;
 }
 
-.PostModal button{
+.PostModal button {
   width: 10vh;
   height: 7vh;
   margin-right: 2vh;
 }
 
-.PostModal button p{
+.PostModal button p {
   font-size: x-large;
 }
