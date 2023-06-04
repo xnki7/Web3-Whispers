@@ -31,7 +31,7 @@
 .LeftCom .textInfo {
   position: relative;
   right: -4vh;
-  top: 0vh;
+  top: -1.5vh;
 }
 
 .LeftCom .images {
@@ -50,7 +50,7 @@
   font-style: normal;
   font-weight: 600;
   font-size: x-large;
-  margin-top: 1.5vh;
+  padding: 1vh;
   cursor: pointer;
 }
 
