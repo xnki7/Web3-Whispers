@@ -47,12 +47,10 @@
 
 .LeftCom p.updateProfile {
   text-align: center;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: x-large;
-  margin: 0;
-  padding: 2vh;
+  margin-top: 1.5vh;
   cursor: pointer;
 }
 
