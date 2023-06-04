@@ -41,6 +41,7 @@ function LeftCom({ togglePop, togglePop2, profile, isProfileCreated }) {
             )}
           </p>
         </div>
+
         <div className="buttons">
           <hr />
           {isProfileCreated && profile && profile.userName ? (

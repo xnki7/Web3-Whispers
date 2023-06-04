@@ -47,12 +47,10 @@
 
 .LeftCom p.updateProfile {
   text-align: center;
-  font-family: "Inter";
   font-style: normal;
   font-weight: 600;
   font-size: x-large;
-  margin: 0;
-  padding: 2vh;
+  margin-top: 1.5vh;
   cursor: pointer;
 }
 
@@ -61,8 +59,11 @@
 }
 
 .LeftCom hr {
-  margin: 0;
-  border: 1.75px solid #946c2c;
+  margin-left: 2vh;
+  margin-right: 2vh;
+  margin-top: 0vh;
+  margin-bottom: 0vh;
+  border: 1px solid #946c2c;
 }
 
 .LeftCom .buttons {
