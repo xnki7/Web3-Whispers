@@ -15,6 +15,7 @@
   border-radius: 0px 0px 20px 20px;
   box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
   padding: 0px;
+  border: solid 3px #999999;
 }
 
 .PostModal .header {
