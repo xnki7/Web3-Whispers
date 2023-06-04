@@ -62,7 +62,7 @@ function Post({ contract, post, setSelectedPost, account }) {
           </div>
           <div className="right">
             <p>{authorName}</p>
-            <p>{post.author}</p>
+            <p>{post.author.slice(0, 6)+'...'+post.author.slice(38, 42)}</p>
           </div>
         </div>
         <p className="tags" onClick={handleClick}>

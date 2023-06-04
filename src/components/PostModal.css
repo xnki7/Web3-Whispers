@@ -21,6 +21,8 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  min-width: 30px;
+  position: fixed;
 }
 
 .PostModal .stuff{
