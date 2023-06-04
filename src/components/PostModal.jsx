@@ -44,16 +44,19 @@ function PostModal({ post, setSelectedPost, contract }) {
     <div className="PostModal">
       <div
         className="header"
-        style={{
-          backgroundImage: `url(${
-            "https://gateway.ipfs.io/ipfs/" + post.imgCID
-          }`,
-          backgroundRepeat: "no-repeat",
-          backgroundSize: "cover",
-          width: "100%",
-          height: "30vh",
-        }}
-      ></div>
+        // style={{
+        //   backgroundImage: `url(${
+        //     "https://gateway.ipfs.io/ipfs/" + post.imgCID
+        //   }`,
+        //   backgroundRepeat: "no-repeat",
+        //   backgroundSize: "cover",
+        //   width: "100%",
+        //   height: "30vh",
+        // }}
+      >
+        {" "}
+        <img src={`https://gateway.ipfs.io/ipfs/${post.imgCID}`} alt="" />
+      </div>
 
       <div className="stuff">
         <h1 className="title">{post.postTitle}</h1>
