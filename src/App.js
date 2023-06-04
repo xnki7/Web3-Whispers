@@ -48,6 +48,7 @@ function App() {
     },
   };
 
+
   async function loadBcData() {
     if (window.ethereum) {
       const provider = new ethers.providers.Web3Provider(
