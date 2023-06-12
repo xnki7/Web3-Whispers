@@ -32,6 +32,8 @@
   position: relative;
   right: -4vh;
   top: -1.5vh;
+  margin-top: 0.75vh;
+  margin-left: -1vh;
 }
 
 .LeftCom .images {

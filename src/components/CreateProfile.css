@@ -12,6 +12,7 @@
   z-index: 10;
   background-color: #fff5e5;
   border-radius: 0px 0px 20px 20px;
+  border: solid 3px#999999;
   max-height: 95vh;
 }
 
