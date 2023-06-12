@@ -14,6 +14,10 @@ function PostModal({ post, setSelectedPost, contract }) {
     getIfLiked();
   }, []);
 
+  useEffect(()=>{
+    getIfLiked();
+  },[likes])
+
   const getAuthorCID = async (account) => {
     const tx = await contract.getAuthorCID(account);
     setAuthorCID(tx);

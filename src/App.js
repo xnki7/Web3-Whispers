@@ -140,6 +140,7 @@ function App() {
                   contract={contract}
                   post={post}
                   setSelectedPost={setSelectedPost}
+                  selectedPost={selectedPost}
                   account={account}
                 />
               ))

@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import "./Post.css";
 
-function Post({ contract, post, setSelectedPost, account }) {
+function Post({ contract, post, setSelectedPost, selectedPost, account }) {
   const [likes, setLikes] = useState(null);
   const [authorCID, setAuthorCID] = useState(null);
   const [authorName, setAuthorName] = useState(null);
@@ -13,6 +13,11 @@ function Post({ contract, post, setSelectedPost, account }) {
     getAuthorName(post.author);
     getIfLiked();
   }, []);
+
+  useEffect(() => {
+    getIfLiked();
+    getLikes();
+  },[selectedPost]);
 
   const likePost = async () => {
     const tx = await contract.likePost(post.id);
@@ -62,7 +67,7 @@ function Post({ contract, post, setSelectedPost, account }) {
           </div>
           <div className="right">
             <p>{authorName}</p>
-            <p>{post.author.slice(0, 6)+'...'+post.author.slice(38, 42)}</p>
+            <p>{post.author.slice(0, 6) + "..." + post.author.slice(38, 42)}</p>
           </div>
         </div>
         <p className="tags" onClick={handleClick}>
