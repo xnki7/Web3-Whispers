@@ -35,9 +35,9 @@ function InputBox({ contract, getUploadedPosts, togglePop }) {
         {
           headers: {
             "Content-Type": "multipart/form-data",
-            pinata_api_key: "3d07323041296c2f041f",
+            pinata_api_key: "85a5038c4046d5649d57",
             pinata_secret_api_key:
-              "c1300780df980e21c76e78c30593b3c23736357a85ebbc2481da0105d73b5315",
+              "b1092d5c4cc0ec356fa667ec48e0e945d888f5e58b0fb8922335231032d9a71c",
           },
         }
       );
